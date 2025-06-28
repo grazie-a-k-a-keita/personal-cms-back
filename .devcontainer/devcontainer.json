@@ -1,0 +1,39 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
+{
+  "name": "Node.js & PostgreSQL",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "quickfix.biome": "explicit",
+          "source.organizeImports.biome": "explicit"
+        },
+        "[prisma]": {
+          "editor.defaultFormatter": "Prisma.prisma"
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "christian-kohler.path-intellisense",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "sleistner.vscode-fileutils",
+        "Prisma.prisma",
+        "biomejs.biome"
+      ]
+    }
+  }
+}
