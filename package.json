@@ -3,7 +3,19 @@
   "repository": "https://github.com/vercel/examples.git",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "bunx tsx --no-cache api/index.ts"
+  },
   "dependencies": {
-    "fastify": "^4.25.2"
+    "@fastify/jwt": "^9.1.0",
+    "@prisma/client": "^6.10.1",
+    "fastify": "^5.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.6",
+    "@types/node": "^24.0.6",
+    "prisma": "^6.10.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }

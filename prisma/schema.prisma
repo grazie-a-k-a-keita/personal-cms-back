@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model OretokuSites {
+  id          Int           @id @default(autoincrement())
+  name        String        @db.VarChar(255)
+  description String
+  url         String        @unique @db.VarChar(255)
+  imageUrl    String        @db.VarChar(255)
+  createdAt   DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime      @default(now()) @db.Timestamp(6)
+  tags        OretokuTags[]
+}
+
+model OretokuTags {
+  id        Int            @id @default(autoincrement())
+  name      String         @unique @db.VarChar(255)
+  imageUrl  String         @db.VarChar(255)
+  isMain    Boolean        @default(false)
+  createdAt DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt DateTime       @default(now()) @db.Timestamp(6)
+  sites     OretokuSites[]
+}

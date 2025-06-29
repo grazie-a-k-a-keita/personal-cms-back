@@ -35,5 +35,6 @@
         "biomejs.biome"
       ]
     }
-  }
+  },
+  "forwardPorts": [5432]
 }
