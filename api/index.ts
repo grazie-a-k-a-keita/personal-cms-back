@@ -5,6 +5,7 @@ import routes from './routes';
 const server = fastify({ logger: true });
 server.register(jwt, {
   secret: process.env.JWT_SECRET || '',
+  // 有効期限の設定
   // sign: { expiresIn: '10m' },
 });
 server.register(routes.oretokuSites, { prefix: 'oretoku-sites' });
@@ -14,11 +15,14 @@ server.get('/ping', async (_request, _reply) => {
   return 'pong\n';
 });
 
-server.post<{ Body: { password: string } }>('/get-token', async (req, reply) => {
+server.post<{ Body: { username: string; password: string } }>('/login', async (req, reply) => {
   try {
-    const { password } = req.body;
+    const { username, password } = req.body;
 
-    if (password !== 'secret') {
+    const envUserName = process.env.USER_NAME || '';
+    const envPassword = process.env.USER_PASSWORD || '';
+
+    if (username !== envUserName || password !== envPassword) {
       reply.status(401).send({ error: 'Unauthorized' });
       return;
     }
