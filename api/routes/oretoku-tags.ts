@@ -22,8 +22,8 @@ export const oretokuTags: FastifyPluginCallback = (
    */
   fastify.get('/', async (_request, reply) => {
     try {
-      const sites = await prisma.oretokuTags.findMany({ orderBy: [{ isMain: 'desc' }, { id: 'asc' }] });
-      reply.send(sites);
+      const tags = await prisma.oretokuTags.findMany({ orderBy: [{ isMain: 'desc' }, { id: 'asc' }] });
+      reply.send(tags);
     } catch (error) {
       console.error(error);
       reply.status(500).send({ error: 'Internal Server Error' });
@@ -36,14 +36,14 @@ export const oretokuTags: FastifyPluginCallback = (
   fastify.get<{ Params: { id: string } }>('/:id', async (request, reply) => {
     try {
       const { id } = request.params;
-      const site = await prisma.oretokuTags.findUnique({
+      const tag = await prisma.oretokuTags.findUnique({
         where: { id: Number(id) },
       });
-      if (!site) {
+      if (!tag) {
         reply.status(404).send({ error: 'Tag not found' });
         return;
       }
-      reply.send(site);
+      reply.send(tag);
     } catch (error) {
       console.error(error);
       reply.status(500).send({ error: 'Internal Server Error' });
@@ -57,14 +57,14 @@ export const oretokuTags: FastifyPluginCallback = (
     try {
       const { name, imageUrl, isMain } = request.body;
 
-      const newSite = await prisma.oretokuTags.create({
+      const newTag = await prisma.oretokuTags.create({
         data: {
           name,
           imageUrl,
           isMain,
         },
       });
-      reply.status(201).send(newSite);
+      reply.status(201).send(newTag);
     } catch (error) {
       console.error(error);
       reply.status(500).send({ error: 'Internal Server Error' });
@@ -78,7 +78,7 @@ export const oretokuTags: FastifyPluginCallback = (
     try {
       const { id, name, imageUrl, isMain } = request.body;
 
-      const updatedSite = await prisma.oretokuTags.update({
+      const updatedTag = await prisma.oretokuTags.update({
         where: { id },
         data: {
           name,
@@ -87,7 +87,7 @@ export const oretokuTags: FastifyPluginCallback = (
           updatedAt: new Date(),
         },
       });
-      reply.send(updatedSite);
+      reply.send(updatedTag);
     } catch (_error) {
       reply.status(500).send({ error: 'Internal Server Error' });
     }
