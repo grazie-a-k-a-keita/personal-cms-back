@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "build": "prisma generate",
     "dev": "bunx tsx --no-cache api/index.ts"
   },
   "dependencies": {
